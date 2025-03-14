@@ -11,7 +11,7 @@ class StackTest {
     private Stack stack;
     @BeforeEach
     void setUp() {
-        stack = new Stack<Pair>(1000, Pair.class);
+        stack = new Stack<Pair>(1000);
     }
 
     @AfterEach
@@ -24,12 +24,6 @@ class StackTest {
     void push() {
         stack.push(new Pair<>(0,"foo"));
         assertEquals("Pair{k=0, v=foo}", stack.peek().toString()); // also checks peek
-    }
-
-    @Test
-    void pushIllegalArgTest(){
-        stack.push(new Pair<>(0,"foo"));
-        assertThrows(IllegalArgumentException.class, () -> stack.push("bar"));
     }
 
     @Test
@@ -69,7 +63,7 @@ class StackTest {
     void isFull() {
         int STACK_SIZE = 1000;
         int i = 0;
-        Stack s2 = new Stack(STACK_SIZE, Pair.class);
+        Stack s2 = new Stack(STACK_SIZE);
 
         while (i < STACK_SIZE) {
             s2.push(new Pair<>(i++,"foo"));
@@ -82,7 +76,7 @@ class StackTest {
     void size() {
         int STACK_SIZE = 1000;
         int i = 0;
-        Stack s2 = new Stack(STACK_SIZE, Pair.class);
+        Stack s2 = new Stack(STACK_SIZE);
         assertEquals(0, s2.size()); // no items pushed to stack
         while (i < STACK_SIZE) {
             s2.push(new Pair<>(i++,"foo"));

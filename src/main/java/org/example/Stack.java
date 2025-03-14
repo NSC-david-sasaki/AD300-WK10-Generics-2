@@ -6,26 +6,18 @@ public class Stack <T>{
     private int maxSize;
     private Class<T> type;
 
-    public Stack(int size, Class<T> classType) {
+    @SuppressWarnings("unchecked")
+    public Stack(int size) {
         this.maxSize = size;
-        try {
-            //noinspection unchecked
-            this.stack = (T[]) java.lang.reflect.Array.newInstance(classType, size);
-        } catch (ClassCastException e) {
-            throw new IllegalArgumentException("Cannot create array of generic type T", e);
-        }
+        this.stack = (T[]) new Object[size];
         this.top = -1;
-        this.type = classType;
     }
 
     public void push(T value) {
         if (top == maxSize - 1) {
             throw new StackOverflowError("Stack is full");
         }
-        // Check if value type matches expected type, else throw exception
-        if (!type.isInstance(value)) {
-            throw new IllegalArgumentException("Invalid type: " + value.getClass().getName());
-        }
+
         stack[++top] = value;
     }
 
